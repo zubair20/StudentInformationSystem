@@ -107,7 +107,7 @@
 
     <div class="loginBox">
         <img src="{{ asset('/myimages/user.png') }}" alt="" class="user" >
-        <h2 class="title">Admin Login Here</h2>
+        <h2 class="title">Student Login Here</h2>
         <form class="form-horizontal" method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
 
