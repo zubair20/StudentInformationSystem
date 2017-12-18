@@ -29,7 +29,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="skin-blue sidebar-mini">
+<body class="skin-blue sidebar-mini ">
 <div id="app" v-cloak>
     <div class="wrapper">
 
@@ -45,6 +45,8 @@ desired effect
         <!-- Main content -->
         <section class="content">
             <!-- Your Page Content Here -->
+            @include('adminlte::partials.errors')
+            @include('adminlte::partials.success')
             @yield('main-content')
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->

@@ -34,14 +34,59 @@
             <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
-            <li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>
+
             <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-link'></i> <span>Students</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                    <li><a href="{{ route('students.index') }}">View Students</a></li>
+                    <li><a href="{{ route('students.create') }}">Add Student</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-link'></i> <span>Teachers</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('teachers.index') }}">View Teachers</a></li>
+                    <li><a href="{{ route('teachers.create') }}">Add Teacher</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-link'></i> <span>Courses</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('courses.index') }}">View Courses</a></li>
+                    <li><a href="{{ route('courses.create') }}">Add Course</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#"><i class='fa fa-link'></i> <span>Sessions</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('sessions.index') }}">View Sessions</a></li>
+                    <li><a href="{{ route('sessions.create') }}">Add Session</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-link'></i> <span>Departments</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('departments.index') }}">View Departments</a></li>
+                    <li><a href="{{ route('departments.create') }}">Add Department</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-link'></i> <span>Semesters</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('semesters.index') }}">View Semesters</a></li>
+                    <li><a href="{{ route('semesters.create') }}">Add Semester</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-link'></i> <span>Marks Types</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('markstypes.index') }}">View Marks Types</a></li>
+                    <li><a href="{{ route('markstypes.create') }}">Add Marks Type</a></li>
+                </ul>
+            </li>
+            <li ><a href="#"><i class='fa fa-link'></i> <span>Change Password</span></a></li>
+
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
