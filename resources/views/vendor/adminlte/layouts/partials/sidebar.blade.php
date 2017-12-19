@@ -17,7 +17,6 @@
                 </div>
             </div>
         @endif
-
         <!-- search form (Optional) -->
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">

@@ -45,6 +45,7 @@ desired effect
         <!-- Main content -->
         <section class="content">
             <!-- Your Page Content Here -->
+
             @include('adminlte::partials.errors')
             @include('adminlte::partials.success')
             @yield('main-content')
