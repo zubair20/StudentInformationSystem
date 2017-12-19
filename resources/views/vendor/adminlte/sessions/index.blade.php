@@ -4,9 +4,6 @@
 	{{ trans('adminlte_lang::message.home') }}
 @endsection
 
-@section('test')
-	<h1>heheheheheheheheh</h1>
-@endsection
 @section('main-content')
 	<div class="container-fluid spark-screen">
 		<div class="row">

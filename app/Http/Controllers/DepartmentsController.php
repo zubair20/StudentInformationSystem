@@ -44,9 +44,11 @@ class DepartmentsController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:departments|alpha',
         ]);
+
         $session = Department::create([
             'name'=> $request->input('name')
         ]);
+        
         if($session){
             return redirect()->route('departments.create')->with('success', 'Department has been created Successfully!!');
         }
