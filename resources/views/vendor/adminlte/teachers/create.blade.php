@@ -64,7 +64,7 @@
 					  		<div class="col-xs-12">
 					  			<div class="form-group">
 								    <label for="address">Address</label>
-								    <textarea name="address" id="address" cols="10" rows="5" placeholder="Enter Address" class="form-control"></textarea>
+								    <textarea name="address" id="address" cols="10" rows="5" placeholder="Enter Address" class="form-control">{{old('address')}}</textarea>
 								</div>
 					  		</div>
 					  		<div class="col-xs-12">

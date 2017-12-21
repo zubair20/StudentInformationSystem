@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -34,12 +34,13 @@ Route::get('/students/login', 'Auth\StudentLoginController@showLoginForm')->name
 Route::post('/students/login', 'Auth\StudentLoginController@login')->name('student.login.submit');
 
 
-//Routes for Students
-Route::resource('/students','StudentsController');
-
 //Routes for Teacher Login
 Route::get('/teachers/login', 'Auth\TeacherLoginController@showLoginForm')->name('teacher.login');
 Route::post('/teachers/login', 'Auth\TeacherLoginController@login')->name('teacher.login.submit');
+
+
+//Routes for Students
+Route::resource('/students','StudentsController');
 
 //Routes for Teachers
 Route::resource('/teachers','TeachersController');

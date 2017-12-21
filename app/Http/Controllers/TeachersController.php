@@ -60,7 +60,7 @@ class TeachersController extends Controller
             'gender'=> $request->input('gender'),
         ]);
         if($teacher){
-            return redirect()->route('teachers.index')->with('success', 'Teacher has been created Successfully!!');
+            return redirect()->route('teachers.create')->with('success', 'Teacher has been created Successfully!!');
         }
         return redirect()->back();
     }
