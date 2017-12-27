@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SemesterValidator;
 use App\Semester;
 use Illuminate\Http\Request;
 
@@ -39,11 +40,8 @@ class SemestersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SemesterValidator $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:semesters|alpha_num',
-        ]);
         $session = Semester::create([
             'name'=> $request->input('name')
         ]);
@@ -72,7 +70,8 @@ class SemestersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $semester = Semester::find($id);
+        return view('adminlte::semesters.edit', ['semester' => $semester]);
     }
 
     /**
@@ -82,9 +81,15 @@ class SemestersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SemesterValidator $request, $id)
     {
-        //
+        $updateSemester = Semester::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+        if($updateSemester){
+            return redirect()->route('semesters.index')->with('success', 'Semester has been Updated Successfully!!');
+        }
+        return redirect()->back();
     }
 
     /**
@@ -95,6 +100,10 @@ class SemestersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $semester = Semester::find($id);
+        if($semester->delete()){
+            return redirect()->route('semesters.index')->with('success', 'Semester has been Deleted Successfully!!');
+        }
+        return redirect()->back();
     }
 }

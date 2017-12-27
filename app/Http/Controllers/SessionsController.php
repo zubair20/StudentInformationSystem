@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\SessionValidator;
 use App\Session;
+use Illuminate\Http\Request;
 
 class SessionsController extends Controller
 {
@@ -40,11 +41,8 @@ class SessionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SessionValidator $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:sessions|min:4|max:4|alpha_num',
-        ]);
         $session = Session::create([
             'name'=> $request->input('name')
         ]);
@@ -74,7 +72,8 @@ class SessionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $session = Session::find($id);
+        return view('adminlte::sessions.edit', ['session' => $session]);
     }
 
     /**
@@ -84,9 +83,15 @@ class SessionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SessionValidator $request, $id)
     {
-        //
+        $updateSession = Session::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+        if($updateSession){
+            return redirect()->route('sessions.index')->with('success', 'Session has been Updated Successfully!!');
+        }
+        return redirect()->back();
     }
 
     /**
@@ -97,6 +102,10 @@ class SessionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $session = Session::find($id);
+        if($session->delete()){
+            return redirect()->route('sessions.index')->with('success', 'Session has been Deleted Successfully!!');
+        }
+        return redirect()->back();
     }
 }

@@ -16,8 +16,21 @@
 				<td>{{ $session->name}}</td>
 				<td>
 					<div class="btn-group" role="group" aria-label="...">
-					  <button type="button" class="btn btn-primary btn-sm">Edit</button>
-					  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+					  <a href="/sessions/{{ $session->id}}/edit" class="btn btn-primary btn-sm">Edit</a>
+					  <a href="#" class="btn btn-danger btn-sm"
+						  onclick="
+						  var result = confirm('Are you sure, You want to delete this Session???');
+						  if(result){
+						    event.preventDefault();
+						    document.getElementById('delete-form{{$session->id}}').submit();
+
+						  }
+						  ">Delete
+					  </a>
+					  <form method="post" action="{{ route('sessions.destroy', [$session->id]) }}" id="delete-form{{ $session->id}}" style="display: none;">
+					    <input type="hidden" name="_method" value="delete">
+					    {{csrf_field()}}
+					  </form>
 					</div>
 				</td>
 			</tr>

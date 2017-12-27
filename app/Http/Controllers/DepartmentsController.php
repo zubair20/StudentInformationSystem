@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Department;
+use App\Http\Requests\DepartmentValidator;
 use Illuminate\Http\Request;
 
 class DepartmentsController extends Controller
@@ -39,17 +40,14 @@ class DepartmentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartmentValidator $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:departments|alpha',
-        ]);
 
-        $session = Department::create([
+        $department = Department::create([
             'name'=> $request->input('name')
         ]);
         
-        if($session){
+        if($department){
             return redirect()->route('departments.create')->with('success', 'Department has been created Successfully!!');
         }
         return redirect()->back();
@@ -74,7 +72,8 @@ class DepartmentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $department = Department::find($id);
+        return view('adminlte::departments.edit', ['department' => $department]);
     }
 
     /**
@@ -84,9 +83,15 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepartmentValidator $request, $id)
     {
-        //
+        $updateDepartment = Department::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+        if($updateDepartment){
+            return redirect()->route('departments.index')->with('success', 'Department has been Updated Successfully!!');
+        }
+        return redirect()->back();
     }
 
     /**
@@ -97,6 +102,10 @@ class DepartmentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $department = Department::find($id);
+        if($department->delete()){
+            return redirect()->route('departments.index')->with('success', 'Department has been Deleted Successfully!!');
+        }
+        return redirect()->back();
     }
 }

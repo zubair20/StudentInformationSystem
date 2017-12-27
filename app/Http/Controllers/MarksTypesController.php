@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MarkstypeValidator;
 use App\Markstype;
 use Illuminate\Http\Request;
 
@@ -39,15 +40,12 @@ class MarksTypesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MarkstypeValidator $request)
     {
-        $this->validate($request, [
-            'name' => 'required|unique:markstypes|alpha_num',
-        ]);
-        $session = Markstype::create([
+        $markstype = Markstype::create([
             'name'=> $request->input('name')
         ]);
-        if($session){
+        if($markstype){
             return redirect()->route('markstypes.create')->with('success', 'Marks type has been created Successfully!!');
         }
         return redirect()->back();
@@ -72,7 +70,8 @@ class MarksTypesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $markstype = Markstype::find($id);
+        return view('adminlte::markstypes.edit', ['markstype' => $markstype]);
     }
 
     /**
@@ -82,9 +81,15 @@ class MarksTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MarkstypeValidator $request, $id)
     {
-        //
+        $updateMarkstype = Markstype::where('id', $id)->update([
+            'name' => $request->name,
+        ]);
+        if($updateMarkstype){
+            return redirect()->route('markstypes.index')->with('success', 'Markstype has been Updated Successfully!!');
+        }
+        return redirect()->back();
     }
 
     /**
@@ -95,6 +100,10 @@ class MarksTypesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $markstype = Markstype::find($id);
+        if($markstype->delete()){
+            return redirect()->route('markstypes.index')->with('success', 'Markstype has been Deleted Successfully!!');
+        }
+        return redirect()->back();
     }
 }
