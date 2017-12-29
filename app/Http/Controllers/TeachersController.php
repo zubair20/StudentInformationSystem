@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TeacherValidator;
 use App\Teacher;
 use Illuminate\Http\Request;
 
@@ -39,16 +40,6 @@ class TeachersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'first_name' => 'required|alpha',
-            'last_name' => 'required|alpha',
-            'contact' => 'required|numeric',
-            'email' => 'required|unique:teachers',
-            'password' => 'required',
-            'address' => 'required',
-            'gender' => 'required',
-        ]);
-
         $teacher = Teacher::create([
             'name' => $request->input('first_name'),
             'first_name' => $request->input('first_name'),
