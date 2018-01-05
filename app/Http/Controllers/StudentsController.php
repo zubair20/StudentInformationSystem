@@ -49,20 +49,6 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'first_name' => 'required|alpha',
-            'last_name' => 'required|alpha',
-            'contact' => 'required|numeric',
-            'email' => 'required|unique:students',
-            'password' => 'required',
-            'reg' => 'required|numeric',
-            'address' => 'required',
-            'session' => 'required',
-            'department' => 'required',
-            'semester' => 'required',
-            'gender' => 'required',
-        ]);
-
         $student = Student::create([
             'name' => $request->input('first_name'),
             'first_name' => $request->input('first_name'),
